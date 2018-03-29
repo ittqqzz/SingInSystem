@@ -2,8 +2,6 @@
 * 处理各种ajax请求
 * */
 var express = require('express');
-var session = require('express-session');
-var iconv = require('iconv-lite');
 //创建路由，监听以/api开头的url
 var router = express.Router();
 var pool = require('../db/mysql');
@@ -19,7 +17,7 @@ router.use(function (req, res, next) {
 });
 
 /*用户登录*/
-router.post('/user/login',function(req, res){
+router.post('/user/login', function (req, res) {
     var name = req.body.name;
     var sno = req.body.sno;
     if (name == '' || sno == '') {
@@ -55,8 +53,8 @@ router.post('/user/login',function(req, res){
                     req.session.sign = true;
                     req.session.name = {
                         name: name,
-                        sno : sno,
-                        id : rows[i].id
+                        sno: sno,
+                        id: rows[i].id
                     }
                     responseData.msg = '学号对应的姓名正确,登录成功';
                     res.json(responseData);
@@ -67,24 +65,50 @@ router.post('/user/login',function(req, res){
         //登录成功之后需要修改数据库记录
         //1.根据学号获取当前登录次数并加一
         sql = 'UPDATE USER SET logintimes=logintimes+1 WHERE sno = ?';
-        connection.query(sql, sqlParams,function (err, rows) {
+        connection.query(sql, sqlParams, function (err, rows) {
             if (err) {
                 throw err;
             }
         });
         //2.更新登录时间
         sql = 'UPDATE USER SET logindate = ? WHERE sno = ?';
-        var newDate = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
-        sqlParams = [newDate, sno];
-        connection.query(sql, [newDate, sno], function (err, rows) {
+        // var newDate = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+        sqlParams = [new Date(), sno];
+        connection.query(sql, sqlParams, function (err, rows) {
             if (err) {
                 console.log('err')
                 throw err;
             }
         });
+
+        // //4.修改signin表的记录
+        // sql = 'INSERT INTO signin(sno, name, signindate, signoutdate, onlinetime, signtimes) VALUES(?, ?, ?, ?, ?, ?)';
+        // sqlParams = [sno, name, new Date(), new Date(), 0, 0];
         connection.release();
     });
 });
 
+/*
+* 用户签到
+* */
+router.post('/user/signin', function (req, res) {
+    console.log('api')
+    var name = req.body.name;
+    var sno = req.body.sno;
+    console.log("name is: "+ name + sno);
+    //往数据库写入签到信息
+    var sql = 'UPDATE signin SET signindate = ?, signintimes=signintimes+1, signstate=1 WHERE sno = ?';
+    var sqlParams = [new Date(), sno];
+    pool.getConnection(function (err, connection) {
+        connection.query(sql, sqlParams, function (err, rows) {
+            if (err) {
+                throw err;
+            }
+            responseData.msg = '签到成功';
+            res.json(responseData);
+        });
+        connection.release();
+    });
+});
 //为了可以被require引用，必须导出模块
 module.exports = router;
