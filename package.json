@@ -1,0 +1,28 @@
+{
+  "name": "singinsystem",
+  "private": false,
+  "version": "1.0.0",
+  "description": "my own project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitee.com:ittqqzz/NodeJSSigninSys.git"
+  },
+  "author": "tqz",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "cookies": "^0.7.1",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "iconv-lite": "^0.4.19",
+    "moment": "^2.21.0",
+    "mysql": "^2.15.0",
+    "session": "^0.1.0",
+    "swig": "^1.4.2"
+  }
+}
