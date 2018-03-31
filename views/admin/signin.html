@@ -33,16 +33,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <span class="navbar-brand">你好：</span>
-            <a class="navbar-brand" href="#" id="name">{{name}}</a>
+            <span class="navbar-brand">你好:</span>
+            <a class="navbar-brand" href="/" id="name" title="返回到首页">{{name}}</a>
             <span style="display: none" id="sno">{{sno}}</span>
+            <span style="display: none" id="signinid">{{signinid}}</span>
             <div class="navbar-form navbar-right">
                 {% if !signstate %}
                 <button class="btn btn-success" id="signin">签到</button>
+                <button class="btn btn-danger disabled">签退</button>
                 {% else%}
                 <button class="btn btn-success disabled" >签到</button>
-                {% endif %}
                 <button class="btn btn-danger" id="signout">签退</button>
+                {% endif %}
+                <button class="btn btn-danger" id="logout" style="margin-left: 25px">退出登录</button>
             </div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">

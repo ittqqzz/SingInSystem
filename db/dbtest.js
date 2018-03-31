@@ -1,22 +1,16 @@
 var pool = require('./mysql');
-var sql = "SELECT * FROM user WHERE sno = ?";
-var sqlParams = ['2016115010120'];
+
 
 pool.getConnection(function (err, connection) {
-    connection.query(sql, sqlParams, function (err, rows, fileds) {
+    sql = 'SELECT signindate FROM signin WHERE signinid = ?';
+    sqlParams = ['baa34960-33e9-11e8-8aff-ffd91d04c3e2'];
+    var signindate;
+    connection.query(sql, sqlParams, function (err, rows) {
         if (err) {
             throw err;
-            return ;
         }
-
-        // for (var i in rows) {
-        //     if (rows[i] == null) {
-        //         console.log('不存此在姓名');
-        //         return;
-        //     }
-        //     //console.log(rows[i].StudentName);
-        // }
-        console.log(rows[0].name);
+        signindate = rows[0].signindate;
+        console.log(typeof signindate);
     });
     connection.release();
 });

@@ -14,15 +14,19 @@
   "author": "tqz",
   "license": "ISC",
   "dependencies": {
+    "Promise": "^1.0.5",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
     "cookies": "^0.7.1",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "iconv-lite": "^0.4.19",
+    "log4js": "^2.5.3",
     "moment": "^2.21.0",
     "mysql": "^2.15.0",
     "session": "^0.1.0",
-    "swig": "^1.4.2"
+    "swig": "^1.4.2",
+    "url": "^0.11.0",
+    "uuid": "^3.2.1"
   }
 }

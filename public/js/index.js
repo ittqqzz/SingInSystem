@@ -17,6 +17,7 @@ $(document).ready(function(){
                     console.log('登录成功');
                     window.location.href = '/admin/signin';
                 } else {
+                    $('#myAlert').show();
                     console.log('登录失败');
                     //跳转到err
                 }
