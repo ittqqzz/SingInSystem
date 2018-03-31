@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <title>错误</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="./favicon.ico">
+    <title>404</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!--把script放在最后加载可以提高网页渲染速度-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </head>
+
 <body>
-<h1>非法登录！</h1>
+<div class="page-header">
+    <h1>你要访问的资源不存在</h1>
+    <h3>错误类型：{{type}}</h3>
+</div>
+<div class="jumbotron">
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1>OOPS!</h1>
+            <p>你要请求的资源去火星了~~~</p>
+            <p>具体原因：{{msg}}</p>
+            <p><a class="btn btn-primary btn-lg" href="/" role="button">回到首页</a></p>
+        </div>
+    </div>
+
+</div>
 </body>
 </html>
