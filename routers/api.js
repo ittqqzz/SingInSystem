@@ -116,10 +116,8 @@ router.post('/user/login', function (req, res) {
 * 用户签到
 * */
 router.post('/user/signin', function (req, res) {
-    console.log('api' + 'session is: ' + req.session);
     var name = req.body.name;
     var sno = req.body.sno;
-    console.log("name is: " + name + sno);
     //往数据库写入签到信息
     /*
     * 根据UUID来修改表
@@ -156,7 +154,6 @@ router.post('/user/signout', function (req, res) {
     * 2.再获取签退时间 同时 计算时间差
     * 3.修改签退时间记录，修改签到状态为0
     * */
-    console.log('执行pool前')
     pool.getConnection(function (err, connection) {
         var days;
         var leave1;
@@ -190,7 +187,7 @@ router.post('/user/signout', function (req, res) {
             leave3 = leave2 % (60 * 1000);      //计算分钟数后剩余的毫秒数
             seconds = Math.round(leave3 / 1000);
             //组装在线时长字符串
-            onlinetime = days+'天'+hours+'小时'+minutes+'分'+seconds+'秒';
+            onlinetime = days + '天' + hours + '小时' + minutes + '分' + seconds + '秒';
             sql = 'UPDATE signin SET signoutdate = ?, onlinetime = ?, signstate=0 WHERE signinid = ?';
             sqlParams = [signoutdate, onlinetime, signinid];
             connection.query(sql, sqlParams, function (err, rows) {

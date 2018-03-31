@@ -21,8 +21,8 @@ router.use(function (req, res, next) {
         next();//中间件的拦截必须要next
     } else {
         res.render('admin/error', {
-            type : '登录出错',
-            msg : '你尚未登录，请先登录'
+            type: '登录出错',
+            msg: '你尚未登录，请先登录'
         });
     }
 
@@ -40,7 +40,7 @@ router.get('/signin', function (req, res) {
 
         var sqlState = 'SELECT signstate FROM signin WHERE signinid = ?';
         var sqlStateParams = [signinid];
-        connection.query(sqlState, sqlStateParams,function (err, rows) {
+        connection.query(sqlState, sqlStateParams, function (err, rows) {
             if (err) {
                 throw err;
             }
@@ -57,24 +57,21 @@ router.get('/signin', function (req, res) {
             if (page < 1) {
                 page = 1;
             }
-            console.log('page is :'+page)
+
             start = Math.max(0, (page - 1) * perpage);
             end = (start + perpage) <= rows.length ? (start + perpage) : rows.length;
             sql = 'SELECT * FROM signin ORDER BY id DESC LIMIT ?, ?';
             sqlParams = [start, end];
 
-            console.log('pages is :'+pages);
-
-            console.log(sqlParams);
             connection.query(sql, sqlParams, function (err, rows) {
 
                 res.render('admin/signin', {
-                    name : req.session.name.name,
-                    sno : req.session.name.sno,
-                    signstate : signState,
-                    rows : rows,
-                    signinid : signinid,
-                    pages : new Array(pages)
+                    name: req.session.name.name,
+                    sno: req.session.name.sno,
+                    signstate: signState,
+                    rows: rows,
+                    signinid: signinid,
+                    pages: new Array(pages)
                 });
             });
 

@@ -18,9 +18,7 @@ app.engine('html', swig.renderFile);
 app.set('views', './views');
 app.set('view engine', 'html');
 
-
 // TODO 日志处理
-
 
 //开发期间关闭模板缓存
 swig.setDefaults({cache:false});
@@ -38,6 +36,6 @@ app.use('/', require('./routers/home'));
 app.use('/admin', require('./routers/admin'));
 app.use('/api', require('./routers/api'));
 //监听服务器端口
-var host = '192.168.9.181';
+var host = 'localhost';
 app.listen(3000, host);
 console.log('Server Started at http://'+ host +':3000');
