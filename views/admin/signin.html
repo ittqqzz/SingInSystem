@@ -90,18 +90,18 @@
         <nav aria-label="Page navigation " style="text-align: center">
             <ul class="pagination">
                 <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo; 上一页</span>
+                    <a href="#" aria-label="Previous" id="previous">
+
                     </a>
                 </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
+                <span style="display: none;" id="pages">{{pages.length}}</span>
+                {% for i in pages%}
+                <li><a href="/admin/signin/?page={{loop.index}}">{{ loop.index }}</a></li>
+                {% endfor %}
+
                 <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">下一页 &raquo;</span>
+                    <a href="#" aria-label="Next" id="next">
+
                     </a>
                 </li>
             </ul>

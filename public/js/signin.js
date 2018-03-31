@@ -72,4 +72,43 @@ $(document).ready(function () {
             }
         });
     });
+
+    //处理分页
+
+        url = window.location.href;
+        var query = url.split("?")[1];
+        var queryArr = query.split("&");
+        var page = queryArr[0].split('=');
+        console.log(1)
+        if (page[1] <= 1) {
+            console.log(2)
+            $('#previous').html('<span aria-hidden="true" >&laquo; 没有上一页了</span>');
+            $('#previous').attr("href","javascript:;");
+        } else {
+            $('#previous').html('<span aria-hidden="true">&laquo; 上一页</span>');
+        }
+
+        var pages = Number($('#pages').html());
+        console.log('pages: ' + pages)
+        if (page[1] >= pages) {
+            $('#next').html('<span aria-hidden="true" class="disabled">没有下一页了 &raquo;</span>');
+            $('#next').attr("href","javascript:;")
+        } else {
+            $('#next').html('<span aria-hidden="true" >下一页 &raquo;</span>');
+        }
+
+
+        $('#previous').click(function () {
+            if ($('#previous').attr('href') == 'javascript:;') {
+            } else {
+                window.location.href = '/admin/signin?page='+(Number(page[1])-1);
+            }
+        });
+
+        $('#next').click(function () {
+            if ($('#next').attr('href') == 'javascript:;') {
+            } else {
+                window.location.href = '/admin/signin?page='+(Number(page[1])+1);
+            }
+        });
 });

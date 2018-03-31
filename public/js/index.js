@@ -15,7 +15,7 @@ $(document).ready(function(){
             success : function (result) {
                 if (!result.code) {
                     console.log('登录成功');
-                    window.location.href = '/admin/signin';
+                    window.location.href = '/admin/signin?page=1';
                 } else {
                     $('#myAlert').show();
                     console.log('登录失败');

@@ -218,5 +218,7 @@ router.post('/user/logout', function (req, res) {
     responseData.msg = 'session清空成功';
     res.json(responseData);
 });
+
+
 //为了可以被require引用，必须导出模块
 module.exports = router;

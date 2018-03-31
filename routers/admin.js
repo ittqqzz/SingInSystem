@@ -4,6 +4,11 @@
 * 例如：重新渲染该页面的资源、重新加载页面参数等
 * */
 
+var perpage = 10; //每页10条数据
+var page = 1;
+var pages = 0;
+var start;
+var end;
 
 //1. 引入资源
 var express = require('express');
@@ -23,13 +28,11 @@ router.use(function (req, res, next) {
 
 });
 
-//处理请求::http://localhost:300/admin
+//处理请求::http://localhost:300/admin   并 实现分页
 router.get('/signin', function (req, res) {
-    console.log('sno is: '+ req.session.name.sno);
 
     //根据UUID获取用户历史登录记录
     var signinid = req.session.name.signinid;
-
     var sql = 'SELECT * FROM signin';
     var sqlParams = [signinid];
     pool.getConnection(function (err, connection) {
@@ -44,17 +47,37 @@ router.get('/signin', function (req, res) {
             signState = rows[0].signstate;
         });
 
-        connection.query(sql, sqlParams, function (err, rows) {
+        connection.query(sql, function (err, rows) {
             if (err) {
                 throw err;
             }
-            res.render('admin/signin', {
-                name : req.session.name.name,
-                sno : req.session.name.sno,
-                signstate : signState,
-                rows : rows,
-                signinid : signinid
+            pages = Math.max(Math.ceil(rows.length / perpage), 1);
+
+            page = (req.query.page) <= pages ? req.query.page : pages;
+            if (page < 1) {
+                page = 1;
+            }
+            console.log('page is :'+page)
+            start = Math.max(0, (page - 1) * perpage);
+            end = (start + perpage) <= rows.length ? (start + perpage) : rows.length;
+            sql = 'SELECT * FROM signin ORDER BY id DESC LIMIT ?, ?';
+            sqlParams = [start, end];
+
+            console.log('pages is :'+pages);
+
+            console.log(sqlParams);
+            connection.query(sql, sqlParams, function (err, rows) {
+
+                res.render('admin/signin', {
+                    name : req.session.name.name,
+                    sno : req.session.name.sno,
+                    signstate : signState,
+                    rows : rows,
+                    signinid : signinid,
+                    pages : new Array(pages)
+                });
             });
+
         });
         connection.release();
     });
