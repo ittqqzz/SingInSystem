@@ -7,23 +7,24 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="/public/favicon.ico">
+    <link rel="icon" href="./favicon.ico">
     <title>签到</title>
     <link href="/public/css/bootstrap.min.css" rel="stylesheet">
     <script src="/public/js/jquery.min.js"></script>
     <script src="/public/js/bootstrap.min.js"></script>
-    <script src="/public/js/signin.js"></script>
     <style>
         body {
             padding-top: 50px;
             padding-bottom: 20px;
             background-color: #eee;
         }
+        #back:hover {
+            color: #4cae4c;
+            font-size: 20px;
+        }
     </style>
 </head>
-
 <body>
-
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -33,34 +34,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <span class="navbar-brand">你好:</span>
-            <a class="navbar-brand" href="/" id="name" title="返回到首页">{{name}}</a>
-            <span style="display: none" id="sno">{{sno}}</span>
-            <span style="display: none" id="signinid">{{signinid}}</span>
-            <div class="navbar-form navbar-right">
-                {% if !signstate %}
-                <button class="btn btn-success" id="signin">签到</button>
-                <button class="btn btn-danger disabled">签退</button>
-                {% else%}
-                <button class="btn btn-success disabled" >签到</button>
-                <button class="btn btn-danger" id="signout">签退</button>
-                {% endif %}
-                <button class="btn btn-danger" id="logout" style="margin-left: 25px">退出登录</button>
-            </div>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <div class="navbar-form navbar-right">
-                <div class="form-group">
-                    <input type="text" placeholder="输入姓名，搜索签到记录" style="width:180px" class="form-control" id="searchname">
-                </div>
-                <button class="btn btn-success" id="search">搜索</button>
-            </div>
-
+            <a class="navbar-brand" href="#" style="font-size: 25px; color: black">搜索结果</a>
+            <a class="navbar-brand" href="#">总签到次数：{{rows.length}}次</a>
+            <a class="navbar-brand" href="javascript:history.back(-1)" id="back">返回上一页</a>
         </div>
     </div>
 </nav>
 
-<!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container" >
         <table class="table table-hover table-striped">
@@ -70,7 +50,7 @@
                 <th>签到时间</th>
                 <th>签退时间</th>
                 <th>在线时长</th>
-                <th>当天签到次数</th>
+                <th>签到总次数</th>
             </tr>
             </thead>
             <tbody>
@@ -84,29 +64,30 @@
                 <td>{{ row.signintimes }}</td>
             </tr>
             {% endfor %}
+
             </tbody>
         </table>
 
-        <!--分页-->
-        <nav aria-label="Page navigation " style="text-align: center">
-            <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Previous" id="previous">
-
-                    </a>
-                </li>
-                <span style="display: none;" id="pages">{{pages.length}}</span>
-                {% for i in pages%}
-                <li><a href="/admin/signin/?page={{loop.index}}">{{ loop.index }}</a></li>
-                {% endfor %}
-
-                <li>
-                    <a href="#" aria-label="Next" id="next">
-
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        <!--分页 -->
+        <!--<nav aria-label="Page navigation " style="text-align: center">-->
+            <!--<ul class="pagination">-->
+                <!--<li>-->
+                    <!--<a href="#" aria-label="Previous">-->
+                        <!--<span aria-hidden="true">&laquo; 上一页</span>-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--<li><a href="#">1</a></li>-->
+                <!--<li><a href="#">2</a></li>-->
+                <!--<li><a href="#">3</a></li>-->
+                <!--<li><a href="#">4</a></li>-->
+                <!--<li><a href="#">5</a></li>-->
+                <!--<li>-->
+                    <!--<a href="#" aria-label="Next">-->
+                        <!--<span aria-hidden="true">下一页 &raquo;</span>-->
+                    <!--</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</nav>-->
     </div>
 </div>
 </body>

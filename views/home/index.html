@@ -33,7 +33,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">首页</a></li>
-                <li><a href="#about" data-toggle="modal" data-target="#myModal">关于实验室</a></li>
+                <li><a href="#about" data-toggle="modal" data-target="#myModal">使用说明</a></li>
             </ul>
         </div>
     </div>
@@ -48,7 +48,14 @@
                 <h4 class="modal-title" id="myModalLabel">实验室简介</h4>
             </div>
             <div class="modal-body">
-                实验室的墙上写着呢！不过。。。那是N多年前的了。  &nbsp;&nbsp;&nbsp;&nbsp;C哩C哩~~
+                <div class="alert alert-info" role="alert">先点击【登录】，按照提示输入信息进行登录。</div>
+                <div class="alert alert-info" role="alert">登录成功后，【先】点击【签到】、提示成功后表明此次签到成功！若失败，则退出浏览器重来。</div>
+                <div class="alert alert-info" role="alert">在实验室学习完毕，需要离开时，请点击【签退】，签到成功后会有弹窗提示。</div>
+                <div class="alert alert-info" role="alert">最后点击【退出登录】，然后可以离开实验室。 </div>
+                <div class="alert alert-warning" role="alert">
+                    一定要按照以上提示的流程来，否则签到无效。每天只可以签到一次<br>
+                    系统比较简单，可能存在我没有测试出来的bug。
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -60,7 +67,7 @@
 <div class="container">
     <div class="jumbotron">
         <h1>JPlus实验室签到系统</h1>
-        <p>欢迎加入JPlus实验室，在这里你可以玩转Javaweb，做出美观的网页界面以及强大的后台管理</p>
+        <p>欢迎加入JPlus实验室</p>
         <p>请登录以便统计考勤</p>
         <p>
             {% if loginState %}

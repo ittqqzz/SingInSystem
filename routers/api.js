@@ -17,7 +17,6 @@ router.use(function (req, res, next) {
     }
     next();
 });
-
 /*用户登录*/
 router.post('/user/login', function (req, res) {
 
@@ -215,7 +214,6 @@ router.post('/user/logout', function (req, res) {
     responseData.msg = 'session清空成功';
     res.json(responseData);
 });
-
 
 //为了可以被require引用，必须导出模块
 module.exports = router;

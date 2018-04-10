@@ -73,6 +73,28 @@ $(document).ready(function () {
         });
     });
 
+    $('#search').click(function () {
+        //处理搜索请求
+        $.ajax({
+            type: 'POST',
+            url: '/admin/user/search',
+            data: {
+                searchname: $('#searchname').val()
+            },
+            success: function (resultt) {
+                if (!resultt.code) {
+                    console.log('搜索成功');
+                    window.location.href = '/admin/search';
+                } else {
+                    console.log('搜索失败');
+                }
+            },
+            error: function (err) {
+                console.log('搜索出错' + err.toString());
+            }
+        });
+    });
+
     //处理分页
 
     url = window.location.href;
@@ -93,7 +115,6 @@ $(document).ready(function () {
     } else {
         $('#next').html('<span aria-hidden="true" >下一页 &raquo;</span>');
     }
-
 
     $('#previous').click(function () {
         if ($('#previous').attr('href') == 'javascript:;') {
